@@ -29,7 +29,7 @@
 				v.site_path = v.sites_path + '/' + req.query['_route'];
 				return v;				
 			} else {
-				v.site_path = v.sites_path;
+				v.site_path = env.root_path + '/admin';
 			}
 			return v;
 		}
