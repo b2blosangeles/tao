@@ -155,6 +155,10 @@
 		};			
 		this.load = function() {
 			var me = this, p = req.params[0];
+			
+			res.send(p);
+			return true;
+			
 			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
 			var v = p.match(patt);
 			if ((v) && typeof v == 'object') {
