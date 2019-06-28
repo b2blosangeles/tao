@@ -176,7 +176,7 @@
 						me.send404(p);
 				}		
 			} else {
-				rese.send(p + '===tt==');
+				res.send(p + '===tt==');
 				if (p.match(/\/$/i)) {
 					me.snedIndex(p)
 				} else {
