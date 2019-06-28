@@ -165,6 +165,8 @@
 		this.load = function() {
 			var me = this, p = req.params[0];
 			me.envSite(env); 
+				res.send(env);
+				return true;
 			
 			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
 			var v = p.match(patt);
@@ -186,8 +188,7 @@
 						me.send404(p);
 				}		
 			} else {
-				res.send(env);
-				return true;
+			
 				if (p.match(/\/$/i)) {
 					me.snedIndex(p)
 				} else {
