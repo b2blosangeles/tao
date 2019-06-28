@@ -164,7 +164,7 @@
 		};			
 		this.load = function() {
 			var me = this, p = req.params[0];
-			me.envSite(env); 
+			env = me.envSite(env); 
 				res.send(env);
 				return true;
 			
