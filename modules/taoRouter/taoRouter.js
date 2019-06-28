@@ -155,10 +155,7 @@
 		};			
 		this.load = function() {
 			var me = this, p = req.params[0];
-			
-			res.send(p+'niu');
-			return true;
-			
+
 			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
 			var v = p.match(patt);
 			if ((v) && typeof v == 'object') {
@@ -179,6 +176,7 @@
 						me.send404(p);
 				}		
 			} else {
+				rese.send(p + '===tt==');
 				if (p.match(/\/$/i)) {
 					me.snedIndex(p)
 				} else {
