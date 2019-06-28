@@ -1,1 +1,1 @@
-res.send('I am really niu');
+res.send('we are really niu');
