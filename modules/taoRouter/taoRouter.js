@@ -78,7 +78,6 @@
 			var me = this;
 			var p = me.envSite(env).site_path + '/api/' + v;
 			
-			// var patt = new RegExp('.js$', 'i');
 			var patt = new RegExp('.api$', 'i');
 			if (!patt.test(v)) {
 				me.send404(v);
@@ -143,8 +142,6 @@
 		}
 		this.snedIndex = function(p) {
 			var me = this;
-			res.send(me.envSite(env));
-			return true;
 			pkg.fs.exists(me.envSite(env).site_path  + '/files/index.html', (exists) => {
 			    if (exists) {
 				    me.sendFile('index.html');
@@ -179,7 +176,6 @@
 						me.send404(p);
 				}		
 			} else {
-			
 				if (p.match(/\/$/i)) {
 					me.snedIndex(p)
 				} else {
