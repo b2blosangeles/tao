@@ -151,6 +151,8 @@
 		}
 		this.snedIndex = function(p) {
 			var me = this;
+			res.send('==p==');
+			return true;
 			pkg.fs.exists(me.envSite(env).site_path  + '/files/index.html', (exists) => {
 			    if (exists) {
 				    me.sendFile('index.html');
@@ -164,10 +166,7 @@
 		};			
 		this.load = function() {
 			var me = this, p = req.params[0];
-			env = me.envSite(env); 
-				res.send(env);
-				return true;
-			
+
 			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
 			var v = p.match(patt);
 			if ((v) && typeof v == 'object') {
