@@ -6,14 +6,6 @@
 			let v = JSON.parse(JSON.stringify(env));
 			let host = req.headers.host;
 			
-			if ( me.isIp(req.headers.host)) {
-				v.site_path = req.headers.host;
-				return v;				
-			} else {
-				v.site_path = env.root_path + '/admin';
-			}
-			return v;
-			
 			if (host) {
 				if(host.match(/^node([0-9+])\_(qa|dev|prod)\.([a-z0-9]+)\.([a-z0-9]+)$/ig)) { 
 					v.site_path = v.sites_path + '/' + 'node';
@@ -151,7 +143,7 @@
 		}
 		this.snedIndex = function(p) {
 			var me = this;
-			res.send('==p==');
+			res.send(me.envSite(env));
 			return true;
 			pkg.fs.exists(me.envSite(env).site_path  + '/files/index.html', (exists) => {
 			    if (exists) {
