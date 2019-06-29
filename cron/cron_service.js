@@ -16,8 +16,18 @@ let _svs_type = ['admin', 'root', 'master', 'node', 'comm'],
     _f = {};
 
  _f0['S0'] = function(cbk) {
-		cbk(true);	
-	}
+	fs.readdir('/var/tao/devs', (err, files) => {
+		var list = [];
+		for (var i=0; i < files.length ;  i++) {
+			if (files[i] !== 'README.md') {
+				list.push(files[i]);
+			}
+		}
+		_dev_type = list;
+		cbk(true);
+	});
+}
+
 CP0.serial(
 	_f0,
 	function(data0) {
