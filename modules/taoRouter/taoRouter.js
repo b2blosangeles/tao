@@ -25,11 +25,11 @@
 				}
 				
 			}	
-			if ((me.isIp(req.headers.host)) && (req.query['_devrouter'])) {
-			    if (['master', 'node', 'root', 'comm'].indexOf(req.query['_devrouter']) !== -1) {
-				v.site_path = v.sites_path + '/' + req.query['_devrouter'];				
-			    } else if (['master', 'node', 'root', 'comm'].indexOf(req.query['_devrouter']) === -1)  {
-			    	v.site_path = v.root_path + '/devs/' + req.query['_devrouter'];
+			if ((me.isIp(req.headers.host)) && (req.query['_IProuter'])) {
+			    if (['master', 'node', 'root', 'comm'].indexOf(req.query['_IProuter']) !== -1) {
+				v.site_path = v.sites_path + '/' + req.query['_IProuter'];				
+			    } else if (['master', 'node', 'root', 'comm'].indexOf(req.query['_IProuter']) === -1)  {
+			    	v.site_path = v.root_path + '/devs/' + req.query['_IProuter'];
 			    } else {
 			    	v.site_path = v.root_path + '/devs/admin' ;
 			    }
