@@ -21,13 +21,13 @@
 					v.site_path = v.sites_path + '/' + 'comm';
 					return v;
 				} 
-				if(host.match(/^(www\.|dev\.|qa\.|)shusiou\.(com|win)$/)) { 
+				if(host.match(/^(www\.|dev\.|qa\.|)taobase\.(com|win)$/)) { 
 					v.site_path = v.sites_path + '/' + 'root';
 					return v;
 				}
 				
 				if(host.match(/^[a-z0-9\_\-+])\_tao\.taobase\.com$/ig)) { 
-					var RT = host.match(/^[a-z0-9\_\-+])\_taobase\.taobase\.com$/ig);
+					var RT = host.match(/^[a-z0-9\_\-+])\_tao\.taobase\.com$/ig);
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
 				} 
