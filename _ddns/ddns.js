@@ -48,7 +48,7 @@
 					    cbk(false);
 				    } else {
 				    	var DS = {};
-					try { DS = JSON..parse(data); } catch(e) {}
+					try { DS = JSON.parse(data); } catch(e) {}
 					if (DS[question.name]) {
 						me.send([{ 
 							name: question.name,
