@@ -25,7 +25,7 @@
 				}
 				
 			}	
-			if ((me.isIp(req.headers.host) && (req.query['_route'])) {
+			if ((me.isIp(req.headers.host)) && (req.query['_route'])) {
 			    if (['master', 'node', 'root', 'comm'].indexOf(req.query['_route']) !== -1) {
 				v.site_path = v.sites_path + '/' + req.query['_route'];				
 			    } else  {
