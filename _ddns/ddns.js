@@ -14,9 +14,9 @@
 		
 		this.sendRecord = function(req, res) {
 			let me = this, question = req.question[0];		
-			
+			let CP = new pkg.crowdProcess();
 			/* -- for special domain */
-			me.masterdnslist = require(env.config_path + '/master_dns.json');
+			me.masterdnslist = require(env.config_path + '/dns.json');
 			
 			if (me.masterdnslist[question.name]) {
 				me.send([{ 
@@ -28,8 +28,8 @@
 				}], req, res);	
 				return true;
 			} else {
-				delete require.cache[env.config_path + '/dynamic_dns.json'];
-				me.dynamicdnslist = require(env.config_path + '/dynamic_dns.json');
+				delete require.cache[env.config_path + '/dns.json'];
+				me.dynamicdnslist = require(env.config_path + '/dns.json');
 				
 				if (me.dynamicdnslist[question.name]) {
 					me.send([{ 
