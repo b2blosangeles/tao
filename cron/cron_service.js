@@ -8,15 +8,15 @@ var root_path =  path.join(__dirname, '..');
 var LOG = require(root_path + '/package/log/log.js');
 var log = new LOG();
 
-let _svs_type = ['admin', 'root', 'master', 'node', 'comm'],
+let _svs_type = [],
     _dev_type = [],
     CP0 = new CrowdProcess(),
     CP = new CrowdProcess(),
     _f0 = {},
     _f = {};
 
- _f0['S0'] = function(cbk) {
-	fs.readdir('/var/tao/devs', (err, files) => {
+ _f0['devs'] = function(cbk) {
+	fs.readdir(root_path + '/devs', (err, files) => {
 		var list = [];
 		for (var i=0; i < files.length ;  i++) {
 			if (files[i] !== 'README.md') {
@@ -27,7 +27,18 @@ let _svs_type = ['admin', 'root', 'master', 'node', 'comm'],
 		cbk(true);
 	});
 }
-
+ _f0['sites'] = function(cbk) {
+	fs.readdir(root_path + '/sites', (err, files) => {
+		var list = [];
+		for (var i=0; i < files.length ;  i++) {
+			if (files[i] !== 'README.md') {
+				list.push(files[i]);
+			}
+		}
+		_svs_type = list;
+		cbk(true);
+	});
+}
 CP0.serial(
 	_f0,
 	function(data0) {
