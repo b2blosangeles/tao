@@ -60,6 +60,25 @@ CP0.serial(
 				}
 			})(i);
 		}
+		
+		for (var i in _dev_type) {
+			_f[_dev_type[i]] = (function(i) {
+				return function(cbk) {
+					let conf_file = root_path + '/devs/' + _dev_type[i] + '/cron_service/cron.json';
+					fs.exists(conf_file, function(exists){
+						let cron_item = [];
+						if(exists) {
+							try {
+								cron_item = require(conf_file);	
+							} catch (e) {
+								log.write("/var/log/tao_cron.log", 'cron', conf_file + ' format error!');
+							}
+						}
+						cbk(cron_item);
+					});	
+				}
+			})(i);
+		}
 		CP.serial(
 			_f,
 			function(data) {
@@ -68,6 +87,17 @@ CP0.serial(
 					for (var j = 0; j < CP.data[_svs_type[i]].length; j++ ) {
 						let rec = CP.data[_svs_type[i]][j];
 						rec.id = _svs_type[i] + '_' + rec.id;
+						rec.type = 'sites';
+						rec.space = _svs_type[i];
+						cron.push(rec);
+					}				
+				}
+				
+				for (var i in _dev_type) {
+					for (var j = 0; j < CP.data[_dev_type[i]].length; j++ ) {
+						let rec = CP.data[_dev_type[i]][j];
+						rec.id = _svs_type[i] + '_' + rec.id;
+						rec.type = 'devs';
 						rec.space = _svs_type[i];
 						cron.push(rec);
 					}				
@@ -76,7 +106,7 @@ CP0.serial(
 				for (var i = 0; i < cron.length; i++) {
 					var f = function(v) {
 						return function() {
-							exec('cd ' + root_path + '/sites/' + v.space + '/cron_service' + ' &&  node ' + v.script, 
+							exec('cd ' + root_path + '/' + +v.type + '/' + v.space + '/cron_service' + ' &&  node ' + v.script, 
 							     {maxBuffer: 1024 * 2048},
 							     function(error, stdout, stderr) {
 								if (error) {
