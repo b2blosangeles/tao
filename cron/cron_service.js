@@ -106,7 +106,7 @@ CP0.serial(
 				for (var i = 0; i < cron.length; i++) {
 					var f = function(v) {
 						return function() {
-							exec('cd ' + root_path + '/' + +v.type + '/' + v.space + '/cron_service' + ' &&  node ' + v.script, 
+							exec('cd ' + root_path + '/' + v.type + '/' + v.space + '/cron_service' + ' &&  node ' + v.script, 
 							     {maxBuffer: 1024 * 2048},
 							     function(error, stdout, stderr) {
 								if (error) {
