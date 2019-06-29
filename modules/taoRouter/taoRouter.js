@@ -30,7 +30,7 @@
 				v.site_path = v.sites_path + '/' + req.query['_route'];
 				return v;				
 			} else {
-				v.site_path = v.sites_path + '/admin' ;
+				v.site_path = v.root_path + '/devs/admin' ;
 			}
 			return v;
 		}
