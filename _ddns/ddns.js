@@ -17,16 +17,16 @@
 			
 			/* -- for special domain */
 			
-			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
-			me.specialNames = require(env.root_path + '/ddns/specialDomain.json');
+			delete require.cache[env.root_path + '/_ddns/dns.json'];
+			me.dnslist = require(env.root_path + '/_ddns/dns.json');
 			
-			if (me.specialNames[question.name]) {
+			if (me.dnslist[question.name]) {
 				me.send([{ 
 					name: question.name,
 					type: 'A',
 					class: 'IN',
 					ttl: 1,
-					data: me.specialNames[question.name]
+					data: me.dnslist[question.name]
 				}], req, res);	
 				return true;
 			} else {
