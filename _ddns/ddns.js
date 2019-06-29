@@ -27,6 +27,7 @@
 						data: me.masterdnslist[question.name]
 					}], req, res);
 					CP.exit = 1;
+					console.log('---1---');
 					cbk(true);
 				} else {
 					cbk(false);
@@ -46,6 +47,7 @@
 						data: me.dynamicdnslist[question.name]
 					}], req, res);
 					CP.exit = 1;
+					console.log('---2---');
 					cbk(true);
 				} else {
 					cbk(false);
@@ -62,6 +64,7 @@
 							ttl: 10,
 							data: null
 						}], req, res);	
+						console.log('---3---');
 					}
 				}, 1000
 			);
