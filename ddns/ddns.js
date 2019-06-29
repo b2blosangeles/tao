@@ -26,12 +26,13 @@
 			/* -- for special domain */
 			
 
-			console.log(question.name + '--->' + env.root_path + '/ddns/specialDomain.json');
-			return true;
+			
 			
 			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
-			this.specialNames = require(env.root_path + '/ddns/specialDomain.json');
-		
+			me.specialNames = require(env.root_path + '/ddns/specialDomain.json');
+			
+			console.log(question.name + '--->' + env.root_path + '/ddns/specialDomain.json');
+			return true;
 			
 			if (me.specialNames[question.name]) {
 				me.send([{ 
