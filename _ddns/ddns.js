@@ -19,6 +19,8 @@
 			delete require.cache[env.root_path + '/_ddns/dns.json'];
 			me.dnslist = require(env.root_path + '/_ddns/dns.json');
 			
+			console.log(env);
+			
 			if (me.dnslist[question.name]) {
 				me.send([{ 
 					name: question.name,
