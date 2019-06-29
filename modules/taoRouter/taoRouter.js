@@ -7,6 +7,8 @@
 			let host = req.headers.host;
 			
 			if (host) {
+
+				
 				if(host.match(/^node([0-9+])\_(qa|dev|prod)\.([a-z0-9]+)\.([a-z0-9]+)$/ig)) { 
 					v.site_path = v.sites_path + '/' + 'node';
 					return v;
@@ -24,6 +26,11 @@
 					return v;
 				}
 				
+				if(host.match(/^[a-z0-9\_\-+])\_taobase\.taobase\.com$/ig)) { 
+					var RT = host.match(/^[a-z0-9\_\-+])\_taobase\.taobase\.com$/ig);
+					v.site_path = v.root_path + '/devs/' + RT[1];
+					return v;
+				} 
 			}	
 			if ((me.isIp(req.headers.host)) && (req.query['_IProuter'])) {
 			    if (['master', 'node', 'root', 'comm'].indexOf(req.query['_IProuter']) !== -1) {
