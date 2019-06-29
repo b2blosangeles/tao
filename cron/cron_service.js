@@ -9,6 +9,7 @@ var LOG = require(root_path + '/package/log/log.js');
 var log = new LOG();
 
 let _svs_type = ['admin', 'root', 'master', 'node', 'comm'],
+    _dev_type = [],
     CP = new CrowdProcess(),
     _f = {};
 
