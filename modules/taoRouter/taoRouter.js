@@ -7,8 +7,6 @@
 			let host = req.headers.host;
 			
 			if (host) {
-
-				
 				if(host.match(/^node([0-9+])\_(qa|dev|prod)\.([a-z0-9]+)\.([a-z0-9]+)$/ig)) { 
 					v.site_path = v.sites_path + '/' + 'node';
 					return v;
@@ -28,6 +26,7 @@
 				
 				if(host.match(/^([a-z0-9+])\_tao\.(taobase|shusiou)\.(com|win)$/ig)) { 
 					var RT = host.match(/^([a-z0-9+])\_tao\.(taobase|shusiou)\.(com|win)$/ig);
+					res.send(RT);
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
 				}
