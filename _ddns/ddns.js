@@ -18,7 +18,7 @@
 			
 			_f['master'] = function(cbk) {
 				let fn = env.config_path + '/dns.json';
-				pkg.fs.readFile(fn, function read(err, data) {
+				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
 				    if (err) {
 					    cbk(false);
 				    } else {
@@ -44,7 +44,7 @@
 			}
 			_f['dynamic'] = function(cbk) {
 				let fn = env.config_path + '/dns.json';
-				pkg.fs.readFile(fn, function read(err, data) {
+				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
 				    if (err) {
 					    cbk(false);
 				    } else {
