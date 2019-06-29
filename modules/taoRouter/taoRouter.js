@@ -24,7 +24,7 @@
 					return v;
 				}
 				
-				if(host.match(/^([a-z0-9+])\_tao\.(taobase|shusiou)\.(com|win)$/i)) { 
+				if(host.match(/^([a-z0-9]+)\_tao\.(taobase|shusiou)\.(com|win)$/i)) { 
 
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
