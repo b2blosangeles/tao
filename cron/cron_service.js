@@ -19,7 +19,7 @@ let _svs_type = ['admin', 'root', 'master', 'node', 'comm'],
 		cbk(true);	
 	}
 CP0.serial(
-	_f,
+	_f0,
 	function(data0) {
 		for (var i in _svs_type) {
 			_f[_svs_type[i]] = (function(i) {
