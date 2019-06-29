@@ -24,8 +24,11 @@
 			    mh = '', m;		
 			
 			/* -- for special domain */
-
+			
 		//	delete require.cache[env.root_path + '/ddns/specialDomain.json'];
+			if (!me.specialNames) {
+				me.specialNames = require(env.root_path + '/ddns/specialDomain.json');
+			}
 		//	me.specialNames = require(env.root_path + '/ddns/specialDomain.json');
 			
 			console.log(question.name + '-->->' + env.root_path + '/ddns/specialDomain.json');
