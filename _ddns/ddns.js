@@ -36,7 +36,7 @@
 						name: question.name,
 						type: 'A',
 						class: 'IN',
-						ttl: 5,
+						ttl: 10,
 						data: me.dynamicdnslist[question.name]
 					}], req, res);	
 					return true;
@@ -45,7 +45,7 @@
 						name: question.name,
 						type: 'A',
 						class: 'IN',
-						ttl: 1,
+						ttl: 10,
 						data: null
 					}], req, res);	
 				}
