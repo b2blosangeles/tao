@@ -16,10 +16,7 @@
 			let me = this, question = req.question[0];		
 			
 			/* -- for special domain */
-			delete require.cache[env.config_path + '/dns.json'];
-			me.dnslist = require(env.config_path + '/dns.json');
-			
-			console.log(env);
+			me.masterdnslist = require(env.config_path + '/master_dns.json');
 			
 			if (me.dnslist[question.name]) {
 				me.send([{ 
@@ -27,17 +24,31 @@
 					type: 'A',
 					class: 'IN',
 					ttl: 1,
-					data: me.dnslist[question.name]
+					data: me.masterdnslist[question.name]
 				}], req, res);	
 				return true;
 			} else {
-				me.send([{ 
-					name: question.name,
-					type: 'A',
-					class: 'IN',
-					ttl: 1,
-					data: null
-				}], req, res);	
+				delete require.cache[env.config_path + '/dynamic_dns.json'];
+				me.dynamicdnslist = require(env.config_path + '/dynamic_dns.json');
+				
+				if (me.dynamicdnslist[question.name]) {
+					me.send([{ 
+						name: question.name,
+						type: 'A',
+						class: 'IN',
+						ttl: 1,
+						data: me.dynamicdnslist[question.name]
+					}], req, res);	
+					return true;
+				} else {
+					me.send([{ 
+						name: question.name,
+						type: 'A',
+						class: 'IN',
+						ttl: 1,
+						data: null
+					}], req, res);	
+				}
 			}
 		};	
 	};
