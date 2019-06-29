@@ -10,7 +10,9 @@ var log = new LOG();
 
 let _svs_type = ['admin', 'root', 'master', 'node', 'comm'],
     _dev_type = [],
+    CP0 = new CrowdProcess(),
     CP = new CrowdProcess(),
+    _f0 = {},
     _f = {};
 
 for (var i in _svs_type) {
