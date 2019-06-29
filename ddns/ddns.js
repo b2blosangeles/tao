@@ -25,6 +25,7 @@
 			
 			/* -- for special domain */
 			console.log(question.name + '--->');
+			return true;
 			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
 			this.specialNames = require(env.root_path + '/ddns/specialDomain.json');
 			console.log(this.specialNames);
