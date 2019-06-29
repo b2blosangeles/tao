@@ -114,7 +114,7 @@ pkg.fs.exists(cert_folder, function(exists) {
     }
 });
 /* ---- DNS Server */
-let ddns_path = env.root_path + '/ddns';
+let ddns_path = env.root_path + '/_ddns';
 pkg.fs.exists(ddns_path, function(exists) {
     if (exists) {
 	function getServerIP() {
