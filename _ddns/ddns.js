@@ -14,7 +14,7 @@
 		
 		this.sendRecord = function(req, res) {
 			let me = this, question = req.question[0];		
-			let CP = new pkg.crowdProcess(), _f = {}, didsent = false;
+			let CP = new pkg.crowdProcess(), _f = {};
 			
 			_f['master'] = function(cbk) {
 				me.masterdnslist = require(env.config_path + '/dns.json');
@@ -27,7 +27,6 @@
 						data: me.masterdnslist[question.name]
 					}], req, res);
 					CP.exit = 1;
-					didsent = true;
 					console.log('---1---');
 					cbk(true);
 				} else {
@@ -48,7 +47,6 @@
 						data: me.dynamicdnslist[question.name]
 					}], req, res);
 					CP.exit = 1;
-					didsent = true;
 					console.log('---2---');
 					cbk(true);
 				} else {
@@ -58,7 +56,7 @@
 			CP.serial(
 				_f,
 				function(data) {
-					if (!didsent) {
+					if (!CP.data.master && !CP.data.dynamic) {
 						me.send([{ 
 							name: question.name,
 							type: 'A',
