@@ -17,7 +17,7 @@
 			let CP = new pkg.crowdProcess(), _f = {};
 			
 			_f['master'] = function(cbk) {
-				let fn = renv.config_path + '/dns.json';
+				let fn = env.config_path + '/dns.json';
 				pkg.fs.readFile(fn, function read(err, data) {
 				    if (err) {
 					    cbk(false);
@@ -42,7 +42,7 @@
 				});
 			}
 			_f['dynamic'] = function(cbk) {
-				let fn = renv.config_path + '/dns.json';
+				let fn = env.config_path + '/dns.json';
 				pkg.fs.readFile(fn, function read(err, data) {
 				    if (err) {
 					    cbk(false);
