@@ -24,11 +24,13 @@
 					return v;
 				}
 				
-			}		
-			if ( me.isIp(req.headers.host) && 
-			    	['master', 'node', 'root', 'comm'].indexOf(req.query['_route']) !== -1) {
-				v.site_path = v.sites_path + '/' + req.query['_route'];
-				return v;				
+			}	
+			if ((me.isIp(req.headers.host) && (req.query['_route'])) {
+			    if (['master', 'node', 'root', 'comm'].indexOf(req.query['_route']) !== -1) {
+				v.site_path = v.sites_path + '/' + req.query['_route'];				
+			    } else  {
+			    	v.site_path = v.root_path + '/devs/' + req.query['_route'];
+			    }
 			} else {
 				v.site_path = v.root_path + '/devs/admin' ;
 			}
