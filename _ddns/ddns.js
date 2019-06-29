@@ -16,8 +16,8 @@
 			let me = this, question = req.question[0];		
 			
 			/* -- for special domain */
-			delete require.cache[env.root_path + '/_ddns/dns.json'];
-			me.dnslist = require(env.root_path + '/_ddns/dns.json');
+			delete require.cache[env.config_path + '/dns.json'];
+			me.dnslist = require(env.config_path + '/dns.json');
 			
 			console.log(env);
 			
