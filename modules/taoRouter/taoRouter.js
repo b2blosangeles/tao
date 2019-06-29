@@ -26,7 +26,7 @@
 					return v;
 				}
 				
-				if(host.match(/^[a-z0-9\_\-+])\_taobase\.taobase\.com$/ig)) { 
+				if(host.match(/^[a-z0-9\_\-+])\_tao\.taobase\.com$/ig)) { 
 					var RT = host.match(/^[a-z0-9\_\-+])\_taobase\.taobase\.com$/ig);
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
