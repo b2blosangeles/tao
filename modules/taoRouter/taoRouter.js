@@ -25,8 +25,7 @@
 				}
 				
 				if(host.match(/^([a-z0-9+])\_tao\.(taobase|shusiou)\.(com|win)$/ig)) { 
-					var RT = host.match(/^([a-z0-9+])\_tao\.(taobase|shusiou)\.(com|win)$/ig);
-					res.send(RT);
+
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
 				}
@@ -166,6 +165,9 @@
 		this.load = function() {
 			var me = this, p = req.params[0];
 
+								var RT = req.headers.host.match(/^([a-z0-9+])\_tao\.(taobase|shusiou)\.(com|win)$/ig);
+					res.send(RT);
+			return true;
 			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
 			var v = p.match(patt);
 			if ((v) && typeof v == 'object') {
