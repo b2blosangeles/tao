@@ -30,7 +30,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 1,
+							ttl: 30,
 							data: DS[question.name]
 						}], req, res);
 						CP.exit = 1;
@@ -54,7 +54,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 1,
+							ttl: 30,
 							data: DS[question.name]
 						}], req, res);
 						CP.exit = 1;
@@ -73,7 +73,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 1,
+							ttl: 30,
 							data: null
 						}], req, res);
 					}
