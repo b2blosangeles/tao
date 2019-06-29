@@ -17,7 +17,7 @@
 			let CP = new pkg.crowdProcess(), _f = {};
 			
 			_f['master'] = function(cbk) {
-				let fn = env.config_path + '/dns.json';
+				let fn = env.config_path + '/main_dns.json';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
 				    if (err) {
 					    cbk(false);
@@ -34,7 +34,6 @@
 							data: DS[question.name]
 						}], req, res);
 						CP.exit = 1;
-						console.log('---1---');
 						cbk(true);
 					} else {
 						cbk(false);
@@ -43,7 +42,7 @@
 				});
 			}
 			_f['dynamic'] = function(cbk) {
-				let fn = env.config_path + '/dns.json';
+				let fn = env.config_path + '/dynamic_dns.json';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
 				    if (err) {
 					    cbk(false);
@@ -59,7 +58,6 @@
 							data: DS[question.name]
 						}], req, res);
 						CP.exit = 1;
-						console.log('---2---');
 						cbk(true);
 					} else {
 						cbk(false);
@@ -77,8 +75,7 @@
 							class: 'IN',
 							ttl: 1,
 							data: null
-						}], req, res);	
-						console.log('---3---');
+						}], req, res);
 					}
 				}, 1000
 			);
