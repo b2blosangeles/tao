@@ -72,11 +72,9 @@
 				    master:/master([0-9]+)\.service\./ig
 			    },	    
 			    mh = '', m;		
-			console.log(question.name);
-			return true;
 			
 			/* -- for special domain */
-			/*
+			
 			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
 			this.specialNames = require(env.root_path + '/ddns/specialDomain.json');
 			if (me.specialNames[question.name]) {
@@ -84,14 +82,22 @@
 					name: question.name,
 					type: 'A',
 					class: 'IN',
-					ttl: 60,
+					ttl: 1,
 					data: me.specialNames[question.name]
 				}], req, res);	
 				return true;
+			} else {
+				me.send([{ 
+					name: question.name,
+					type: 'A',
+					class: 'IN',
+					ttl: 1,
+					data: null
+				}], req, res);	
 			}
-			*/
-			/* -- for special domain end */
 			
+			/* -- for special domain end */
+			/*
 			for (var key in patt) {
 				if (patt[key].test(question.name)) {
 					mh = key;
@@ -141,6 +147,7 @@
 						data: null
 					}], req, res);					
 			}
+			*/
 		};	
 	};
 	module.exports = obj;
