@@ -114,7 +114,7 @@ pkg.fs.exists(cert_folder, function(exists) {
     }
 });
 /* ---- DNS Server */
-let ddns_path = env.sites_path + '/root';
+let ddns_path = env.root_path + '/ddns';
 pkg.fs.exists(ddns_path, function(exists) {
     if (exists) {
 	function getServerIP() {
@@ -132,7 +132,7 @@ pkg.fs.exists(ddns_path, function(exists) {
 		try {
 			dnsd.createServer((function(i) {return function(req, res) {
 				delete require.cache[ddns_path];
-				let DDNS  = require(ddns_path + '/api/inc/ddns/ddns.js'), 
+				let DDNS  = require(ddns_path + '/ddns.js'), 
 				    ddns = new DDNS(env, _dns, ips[i]);
 				ddns.sendRecord(req, res);
 
