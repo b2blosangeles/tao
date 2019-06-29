@@ -72,11 +72,13 @@
 				    master:/master([0-9]+)\.service\./ig
 			    },	    
 			    mh = '', m;		
+			console.log(question.name);
+			return true;
 			
 			/* -- for special domain */
 			/*
-			delete require.cache[env.site_path + '/ddns/specialDomain.json'];
-			this.specialNames = require(env.site_path + '/ddns/specialDomain.json');
+			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
+			this.specialNames = require(env.root_path + '/ddns/specialDomain.json');
 			if (me.specialNames[question.name]) {
 				me.send([{ 
 					name: question.name,
