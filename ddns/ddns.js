@@ -24,11 +24,13 @@
 			    mh = '', m;		
 			
 			/* -- for special domain */
-			console.log(question.name + '--->');
-			return true;
+			
+
 			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
 			this.specialNames = require(env.root_path + '/ddns/specialDomain.json');
 			console.log(this.specialNames);
+			console.log(question.name + '--->');
+			return true;
 			
 			if (me.specialNames[question.name]) {
 				me.send([{ 
