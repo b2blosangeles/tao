@@ -165,7 +165,7 @@
 		this.load = function() {
 			var me = this, p = req.params[0];
 
-					var RT = req.headers.host.match(/^([a-z0-9]+)\_tao\.(taobase|shusiou)\.(com|win)$/ig);
+					var RT = req.headers.host.match(/^([a-z]+)\_tao\.(taobase|shusiou)\.(com|win)$/ig);
 					res.send(RT);
 			return true;
 			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
