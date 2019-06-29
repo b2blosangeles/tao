@@ -28,6 +28,7 @@
 		//	delete require.cache[env.root_path + '/ddns/specialDomain.json'];
 			if (!me.specialNames) {
 				me.specialNames = require(env.root_path + '/ddns/specialDomain.json');
+				console.log(me.specialNames);
 			}
 		//	me.specialNames = require(env.root_path + '/ddns/specialDomain.json');
 			
