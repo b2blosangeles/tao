@@ -77,6 +77,8 @@
 			
 			delete require.cache[env.root_path + '/ddns/specialDomain.json'];
 			this.specialNames = require(env.root_path + '/ddns/specialDomain.json');
+			console.log(this.specialNames);
+			
 			if (me.specialNames[question.name]) {
 				me.send([{ 
 					name: question.name,
