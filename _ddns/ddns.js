@@ -17,41 +17,54 @@
 			let CP = new pkg.crowdProcess(), _f = {};
 			
 			_f['master'] = function(cbk) {
-				me.masterdnslist = require(env.config_path + '/dns.json');
-				if (me.masterdnslist[question.name]) {
-					me.send([{ 
-						name: question.name,
-						type: 'A',
-						class: 'IN',
-						ttl: 1,
-						data: me.masterdnslist[question.name]
-					}], req, res);
-					CP.exit = 1;
-					console.log('---1---');
-					cbk(true);
-				} else {
-					cbk(false);
-				}	
-				
+				let fn = renv.config_path + '/dns.json';
+				pkg.fs.readFile(fn, function read(err, data) {
+				    if (err) {
+					    cbk(false);
+				    } else {
+				    	var DS = {};
+					try { DS = JSON.parser(data); } catch(e) {}
+					if (DS[question.name]) {
+						me.send([{ 
+							name: question.name,
+							type: 'A',
+							class: 'IN',
+							ttl: 1,
+							data: DS[question.name]
+						}], req, res);
+						CP.exit = 1;
+						console.log('---1---');
+						cbk(true);
+					} else {
+						cbk(false);
+					}	
+				    }
+				});
 			}
 			_f['dynamic'] = function(cbk) {
-				delete require.cache[env.config_path + '/dns.json'];
-				me.dynamicdnslist = require(env.config_path + '/dns.json');
-				
-				if (me.dynamicdnslist[question.name]) {
-					me.send([{ 
-						name: question.name,
-						type: 'A',
-						class: 'IN',
-						ttl: 1,
-						data: me.dynamicdnslist[question.name]
-					}], req, res);
-					CP.exit = 1;
-					console.log('---2---');
-					cbk(true);
-				} else {
-					cbk(false);
-				}
+				let fn = renv.config_path + '/dns.json';
+				pkg.fs.readFile(fn, function read(err, data) {
+				    if (err) {
+					    cbk(false);
+				    } else {
+				    	var DS = {};
+					try { DS = JSON.parser(data); } catch(e) {}
+					if (DS[question.name]) {
+						me.send([{ 
+							name: question.name,
+							type: 'A',
+							class: 'IN',
+							ttl: 1,
+							data: DS[question.name]
+						}], req, res);
+						CP.exit = 1;
+						console.log('---2---');
+						cbk(true);
+					} else {
+						cbk(false);
+					}	
+				    }
+				});
 			}
 			CP.serial(
 				_f,
