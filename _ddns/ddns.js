@@ -18,7 +18,7 @@
 			/* -- for special domain */
 			me.masterdnslist = require(env.config_path + '/master_dns.json');
 			
-			if (me.dnslist[question.name]) {
+			if (me.masterdnslist[question.name]) {
 				me.send([{ 
 					name: question.name,
 					type: 'A',
