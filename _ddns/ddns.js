@@ -1,5 +1,5 @@
 (function () { 
-	var obj =  function (env, _dns, ns_ip) {
+	var obj =  function (pkg, env, _dns, ns_ip) {
 		this.validateIPaddress = function (ip)  {
 			let patt = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 			return (patt.test(ip)) ?  true : false;
