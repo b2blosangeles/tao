@@ -23,6 +23,7 @@
 					    cbk(false);
 				    } else {
 				    	var DS = {};
+					    console.log(data);
 					try { DS = JSON.parse(data); } catch(e) {}
 					if (DS[question.name]) {
 						me.send([{ 
