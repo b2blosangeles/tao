@@ -96,9 +96,9 @@ CP0.serial(
 				for (var i in _dev_type) {
 					for (var j = 0; j < CP.data[_dev_type[i]].length; j++ ) {
 						let rec = CP.data[_dev_type[i]][j];
-						rec.id = _svs_type[i] + '_' + rec.id;
+						rec.id = _dev_type[i] + '_' + rec.id;
 						rec.type = 'devs';
-						rec.space = _svs_type[i];
+						rec.space = _dev_type[i];
 						cron.push(rec);
 					}				
 				}
