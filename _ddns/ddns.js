@@ -63,7 +63,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 10,
+							ttl: 1,
 							data: null
 						}], req, res);	
 						console.log('---3---');
