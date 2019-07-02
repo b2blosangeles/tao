@@ -108,7 +108,7 @@
 								pkg.fs.readFile(p, 'utf8', function(err, code) {
 									if (!err) {
 										try {
-											new Function('GLOBAL', 'require', 'pkg', 'env', 'req', 'res', 'io', code)
+											new Function('TAO', 'require', 'pkg', 'env', 'req', 'res', 'io', code)
 											({require : require, pkg: pkg, env: me.envSite(env), req : req, res : res, io : io}, require, pkg, me.envSite(env), req, res, io);
 										} catch(err) {
 											me.send500(err);
