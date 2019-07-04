@@ -24,7 +24,12 @@
 										
 										for (var i = 0; i < files.length; i++) {
 											if ((p + files[i]) != fn) {
-												fs.unlink( p + files[i]);
+												fs.unlink( p + files[i](err) => {
+												  if (err) {
+												    console.error(err)
+												    return
+												  }
+												});
 											}		
 										 }
 									}
