@@ -68,16 +68,7 @@ app.post(/(.+)$/i, function (req, res) {
 	var router  = require(__dirname + '/modules/taoRouter/taoRouter.js');
 	var R = new router(pkg, env, req, res);
 	R.load();
-});
-
-function _getServerIP() {
-    var ifaces = require('os').networkInterfaces(), address=[];
-    for (var dev in ifaces) {
-	var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
-	for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
-    }
-    return address;
-};	
+});	
 
 var server = require('http').createServer(app);
 server.listen(port, function() {
@@ -124,7 +115,15 @@ pkg.fs.exists(cert_folder, function(exists) {
 /* ---- DNS Server */
 let ddns_path = env.root_path + '/_ddns';
 pkg.fs.exists(ddns_path, function(exists) {
-    if (exists) {	    
+    if (exists) {
+	function _getServerIP() {
+	    var ifaces = require('os').networkInterfaces(), address=[];
+	    for (var dev in ifaces) {
+		var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
+		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
+	    }
+	    return address;
+	};
 	let dnsd = require('./package/dnsd/node_modules/dnsd'),
 	    ips = _getServerIP(),
 	    dnsport = 53;
