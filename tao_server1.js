@@ -73,11 +73,7 @@ app.post(/(.+)$/i, function (req, res) {
 var server = require('http').createServer(app);
 server.listen(port, function() {
 	log.write("/var/log/tao_master_reboot.log", 'tao master boot up', 'Started server on port ' + port + '!'); 
-	/* ---*/
-	delete require.cache[__dirname + '/modules/io/node_modules/io'];
-	var IO = require(__dirname + '/modules/io/node_modules/io')
-	let io =  new IO(env, pkg, server);
-	// let io =  new pkg.io(env, pkg, server);
+	let io =  new pkg.io(env, pkg, server);
 });
 
 var cert_folder = '/var/cert/sites/';
@@ -111,11 +107,7 @@ pkg.fs.exists(cert_folder, function(exists) {
 		var https_server =  require('https').createServer(httpsOptions, app);
 		https_server.listen(443, function() {
 			console.log('Started server on port 443 at' + new Date() + '');
-			/* ---*/
-			delete require.cache[__dirname + '/modules/io/node_modules/io'];
-			var IO = require(__dirname + '/modules/io/node_modules/io')
-			let io =  new IO(env, pkg, https_server);
-			// let io =  new pkg.io(env, pkg, https_server);
+			let io =  new pkg.io(env, pkg, https_server);
 		});		
 	});
     }
