@@ -76,8 +76,8 @@ server.listen(port, function() {
 	/* ---*/
 	delete require.cache[__dirname + '/modules/io/node_modules/io'];
 	var IO = require(__dirname + '/modules/io/node_modules/io')
-	let io =  new IO(env, pkg, https_server);
-	// let io =  new pkg.io(env, pkg, https_server);
+	let io =  new IO(env, pkg, server);
+	// let io =  new pkg.io(env, pkg, server);
 });
 
 var cert_folder = '/var/cert/sites/';
