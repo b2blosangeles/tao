@@ -9,13 +9,19 @@
 		    }
 		    return address;
 		};
+		this.getSN = function() {
+			if (this.sno > 1000000) this.sno = 1;
+			else this.sno++;
+			return this.sno;
+		};
 		this.uuid = function() {
 			let ips = this._getServerIP();
-			var ipv = 0
+			var ipv = 0;
 			for (var i = 0; i < ips.length; i++) {
+				console.log(ips)
 				ipv += parseInt(ips[i].replace('.', ''));
 			}
-			return ipv + '.' +  Math.floor(new Date().getTime() * 0.001) + '.' + this.sno;
+			return ipv + '.' +  Math.floor(new Date().getTime() * 0.001) + '.' + this.getSN();
 		};
 	};
 	module.exports = obj;
