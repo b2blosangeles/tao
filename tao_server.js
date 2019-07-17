@@ -21,6 +21,7 @@ var _dns = {m:{tm:new Date().getTime(), list:[]},
 	    c:{tm:new Date().getTime(), list:[]}};
 var pkg = {
 	crowdProcess:require('./package/crowdProcess/crowdProcess'),
+	comm		: new require('./package/comm/comm')(),
 	request		:require('./package/request/node_modules/request'),
 	syntaxError	:require('./package/syntax-error/node_modules/syntax-error'),
 	fs		:require('fs'),
