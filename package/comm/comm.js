@@ -18,8 +18,6 @@
 			let ips = this._getServerIP();
 			var ipv = 0;
 			for (var i = 0; i < ips.length; i++) {
-				console.log(ips)
-				console.log(parseInt(ips[i].replace(/\./g, '')))
 				ipv += parseInt(ips[i].replace(/\./g, ''));
 			}
 			return ipv + '.' +  Math.floor(new Date().getTime() * 0.001) + '.' + this.getSN();
