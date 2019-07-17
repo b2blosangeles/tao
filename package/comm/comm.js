@@ -14,7 +14,7 @@
 			else this.sno++;
 			return this.sno;
 		};
-		this.uuid = function() {
+		this.getUUID = function() {
 			let ips = this._getServerIP();
 			var ipv = 0;
 			for (var i = 0; i < ips.length; i++) {
