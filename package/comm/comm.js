@@ -1,6 +1,6 @@
 (function () { 
 	var obj =  function () {
-		var this.sno = 0;
+		this.sno = 1;
 		this._getServerIP = function () {
 		    var ifaces = require('os').networkInterfaces(), address=[];
 		    for (var dev in ifaces) {
