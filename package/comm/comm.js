@@ -13,9 +13,9 @@
 			let ips = this._getServerIP();
 			var ipv = 0
 			for (var i = 0; i < ips.length; i++) {
-				ipv += Intparse(ips[i].replace('.', ''));
+				ipv += parseInt(ips[i].replace('.', ''));
 			}
-			return ipv
+			return ipv + Math.floor(new Date().getTime() * 0.001) + '.' + this.sno;
 		};
 	};
 	module.exports = obj;
