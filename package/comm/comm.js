@@ -15,7 +15,7 @@
 			for (var i = 0; i < ips.length; i++) {
 				ipv += parseInt(ips[i].replace('.', ''));
 			}
-			return ipv + Math.floor(new Date().getTime() * 0.001) + '.' + this.sno;
+			return ipv + '.' +  Math.floor(new Date().getTime() * 0.001) + '.' + this.sno;
 		};
 	};
 	module.exports = obj;
