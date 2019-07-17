@@ -20,7 +20,7 @@
 			for (var i = 0; i < ips.length; i++) {
 				ipv += parseInt(ips[i].replace(/\./g, ''));
 			}
-			return ipv + '.' +  Math.floor(new Date().getTime() * 0.001) + '.' + this.getSN();
+			return ipv + '_' +  Math.floor(new Date().getTime() * 0.001) + '_' + this.getSN();
 		};
 	};
 	module.exports = obj;
