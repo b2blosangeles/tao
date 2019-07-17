@@ -118,16 +118,8 @@ pkg.fs.exists(cert_folder, function(exists) {
 let ddns_path = env.root_path + '/_ddns';
 pkg.fs.exists(ddns_path, function(exists) {
     if (exists) {
-	function _getServerIP() {
-	    var ifaces = require('os').networkInterfaces(), address=[];
-	    for (var dev in ifaces) {
-		var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
-		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
-	    }
-	    return address;
-	};
 	let dnsd = require('./package/dnsd/node_modules/dnsd'),
-	    ips = _getServerIP(),
+	    ips = pkg.comm._getServerIP(),
 	    dnsport = 53;
 	for (var i = 0; i < ips.length; i++) {
 		try {
