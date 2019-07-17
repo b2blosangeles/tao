@@ -1,5 +1,6 @@
 (function () { 
 	var obj =  function () {
+		var this.sno = 0;
 		this._getServerIP = function () {
 		    var ifaces = require('os').networkInterfaces(), address=[];
 		    for (var dev in ifaces) {
@@ -9,7 +10,12 @@
 		    return address;
 		};
 		this.uuid = function() {
-			return this._getServerIP()
+			let ips = this._getServerIP();
+			var ipv = 0
+			for (var i = 0; i < ips.length; i++) {
+				ipv += Intparse(ips[i].replace('.', ''));
+			}
+			return ipv
 		};
 	};
 	module.exports = obj;
