@@ -5,7 +5,7 @@ compression = require('./package/compression/node_modules/compression'),
 tls = require('tls'),  
 app			= express(),
 expireTime	= 604800000,
-port 		= 10800;
+port 		= 81;
 
 var LOG = require(__dirname + '/package/log/log.js');
 var log = new LOG();		
