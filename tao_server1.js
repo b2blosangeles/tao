@@ -114,27 +114,3 @@ pkg.fs.exists(cert_folder, function(exists) {
 	});
     }
 });
-/* ---- DNS Server */
-let ddns_path = env.root_path + '/_ddns';
-pkg.fs.exists(ddns_path, function(exists) {
-    if (exists) {
-	let dnsd = require('./package/dnsd/node_modules/dnsd'),
-	    ips = pkg.comm._getServerIP(),
-	    dnsport = 53;
-	for (var i = 0; i < ips.length; i++) {
-		try {
-			dnsd.createServer((function(i) {return function(req, res) {
-				delete require.cache[ddns_path];
-				let DDNS  = require(ddns_path + '/ddns.js'), 
-				    ddns = new DDNS(pkg, env, _dns, ips[i]);
-				ddns.sendRecord(req, res);
-
-			}})(i)).listen(dnsport, ips[i])
-			console.log('DNS Server running at ' + ips[i] + ':' + dnsport);
-		} catch (e) {
-			console.log('Error ' + e.message);
-		}
-	}
-    }
-});
-/* ---- DNS Server */
