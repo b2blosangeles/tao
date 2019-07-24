@@ -38,8 +38,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.use(compression({level:9}));
 
 app.all('*', function(req, res, next) {
-	res.send('1234');
-	return '111'
        res.header("Access-Control-Allow-Origin", "*");
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -61,6 +59,8 @@ app.use(function(req, res, next){
 });
 
 app.get(/(.+)$/i, function (req, res) {
+		res.send('1234');
+	return '111';
 	delete require.cache[__dirname + '/modules/taoRouter/taoRouter.js'];
 	var router  = require(__dirname + '/modules/taoRouter/taoRouter.js');
 	var R = new router(pkg, env, req, res);
