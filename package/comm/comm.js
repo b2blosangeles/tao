@@ -22,6 +22,14 @@
 			}
 			return ipv + '_' +  Math.floor(new Date().getTime() * 0.001) + '_' + this.getSN();
 		};
+		this.getSERVERID = function() {
+			let ips = this._getServerIP();
+			var ipv = 0;
+			for (var i = 0; i < ips.length; i++) {
+				ipv += parseInt(ips[i].replace(/\./g, ''));
+			}
+			return ipv + '';
+		};
 	};
 	module.exports = obj;
 })();
