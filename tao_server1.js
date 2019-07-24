@@ -5,7 +5,7 @@ compression = require('./package/compression/node_modules/compression'),
 tls = require('tls'),  
 app			= express(),
 expireTime	= 604800000,
-port 		= 88;
+port 		= 8080;
 
 var LOG = require(__dirname + '/package/log/log.js');
 var log = new LOG();		
@@ -38,6 +38,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.use(compression({level:9}));
 
 app.all('*', function(req, res, next) {
+	res.send('1234');
+	return '111'
        res.header("Access-Control-Allow-Origin", "*");
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Access-Control-Allow-Headers', 'Content-Type');
