@@ -5,8 +5,6 @@
 			var me = this;
 			let v = JSON.parse(JSON.stringify(env));
 			let host = req.headers.host;
-			console.log('===host==>' );
-			console.log(host );
 			if (host) {
 				if(host.match(/^node([0-9]+)\_(qa|dev|prod)\.([a-z0-9]+)\.([a-z0-9]+)$/ig)) { 
 					v.site_path = v.sites_path + '/' + 'node';
