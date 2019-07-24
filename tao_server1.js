@@ -5,7 +5,7 @@ compression = require('./package/compression/node_modules/compression'),
 tls = require('tls'),  
 app			= express(),
 expireTime	= 604800000,
-port 		= 80;
+port 		= 8080;
 
 var LOG = require(__dirname + '/package/log/log.js');
 var log = new LOG();		
@@ -107,7 +107,7 @@ pkg.fs.exists(cert_folder, function(exists) {
 			}
 		};
 		var https_server =  require('https').createServer(httpsOptions, app);
-		https_server.listen(443, function() {
+		https_server.listen(1443, function() {
 			console.log('Started server on port 443 at' + new Date() + '');
 			let io =  new pkg.io(env, pkg, https_server, true);
 		});		
