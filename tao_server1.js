@@ -76,6 +76,7 @@ app.post(/(.+)$/i, function (req, res) {
 
 var server = require('http').createServer(app);
 server.listen(port, function() {
+	console.log('Started server on port ' + port + '!');
 	log.write("/var/log/tao_master_reboot.log", 'tao master boot up', 'Started server on port ' + port + '!'); 
 	let io =  new pkg.io(env, pkg, server, false);
 });
