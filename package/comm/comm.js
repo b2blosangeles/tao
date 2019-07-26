@@ -30,6 +30,10 @@
 			}
 			return ipv + '';
 		};
+		
+		this.ip2int = function(ip) {
+		    return ip.split('.').reduce(function(ipInt, octet) { return (ipInt<<8) + parseInt(octet, 10)}, 0) >>> 0;
+		}
 	};
 	module.exports = obj;
 })();
