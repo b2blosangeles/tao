@@ -30,7 +30,15 @@
 			}
 			return ipv + '';
 		};
-		
+		this.isIp = function(ip) {
+		    var arrIp = ip.split(".");
+		    if (arrIp.length !== 4) return false;
+		    for (let oct of arrIp) {
+			if ( isNaN(oct) || Number(oct) < 0 || Number(oct) > 255)
+			    return false;
+		    }
+		    return true;
+		};		
 		this.ip2int = function(ip) {
 		    return ip.split('.').reduce(function(ipInt, octet) { return (ipInt<<8) + parseInt(octet, 10)}, 0) >>> 0;
 		}
