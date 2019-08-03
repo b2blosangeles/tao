@@ -144,5 +144,7 @@ var svr = function() {
 
 var fs = require('fs');
 fs.exists('/var/debug.txt', function(exists) {
-	if (!exist) svr();
+	if (!exists) {
+		svr();
+	}
 });
