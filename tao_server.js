@@ -140,5 +140,9 @@ var svr = function() {
 	});
 	/* ---- DNS Server */
 };
-svr();
 
+
+var fs = require('fs');
+fs.exists('/var/debug.txt', function(exists) {
+	if (!exist) svr();
+});
