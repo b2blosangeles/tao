@@ -9,7 +9,10 @@ var svr = function() {
 	port 		= 80;
 
 	var LOG = require(__dirname + '/package/log/log.js');
-	var log = new LOG();		
+	var log = new LOG();	
+	var _pool = {
+		sockets : {}
+	};
 	var env = {
 		root_path:__dirname,
 		config_path:'/var/tao_config',
@@ -76,7 +79,7 @@ var svr = function() {
 	var server = require('http').createServer(app);
 	server.listen(port, function() {
 		log.write("/var/log/tao_master_reboot.log", 'tao master boot up', 'Started server on port ' + port + '!'); 
-		let io =  new pkg.io(env, pkg, server, false);
+		let io =  new pkg.io(env, pkg, _pool, server, false);
 	});
 
 	var cert_folder = '/var/cert/sites/';
@@ -110,7 +113,7 @@ var svr = function() {
 			var https_server =  require('https').createServer(httpsOptions, app);
 			https_server.listen(443, function() {
 				console.log('Started server on port 443 at' + new Date() + '');
-				let io =  new pkg.io(env, pkg, https_server, true);
+				let io =  new pkg.io(env, pkg, _pool, https_server, true);
 			});		
 		});
 	    }
