@@ -28,7 +28,13 @@
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
 				}
+				if(host.match(/^([a-z0-9]+)\_dev\.(taobase|shusiou)\.(com|win)$/i)) { 
+					let RT = host.match(/^([a-z0-9]+)\_dev\.(taobase|shusiou)\.(com|win)$/);
+					v.site_path = v.root_path + '/devs/' + RT[1];
+					return v;
+				}
 			}	
+			
 			if ((me.isIp(req.headers.host)) && (req.query['_IProuter'])) {
 			    if (['master', 'node', 'root', 'comm'].indexOf(req.query['_IProuter']) !== -1) {
 				v.site_path = v.sites_path + '/' + req.query['_IProuter'];				
