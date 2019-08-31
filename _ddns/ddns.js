@@ -9,7 +9,7 @@
 			let me = this;
 			console.log('---v--->')
 			console.log(v)
-			v[0].data =  (me.validateIPaddress(v[0].data)) ? v[0].data : null;
+			v.data =  (me.validateIPaddress(v.data)) ? v.data : null;
 			res.answer = v;	
 			res.end();
 		};
@@ -74,13 +74,13 @@
 							ttl: 600,
 							data: ip
 						    }]);
-						    me.send([{ 
+						    me.send({ 
 							name: question.name,
 							type: 'A',
 							class: 'IN',
 							ttl: 600,
 							data: ip
-						    }]);
+						    });
 						    CP.exit = 1;
 						    cbk(true);
 						    return true
