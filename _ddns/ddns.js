@@ -73,26 +73,28 @@
 				    } else {
 					var DL =  [], DS = {};
 					try { DL = data.split("\n"); } catch(e) {}
+					DL = DL.reverse(); 
 					for (var i = 0; i < DL.length; i++) {
-						DL[i] = DL[i].split('=>');
-						if (DL[i].length == 2) {
-							DS[DL[i][0].replace(/^\s+|\s+$/gm,'')] = DL[i][1].replace(/^\s+|\s+$/gm,'')
-						}
-					} 
-					for (var key in DS) {
+					    DL[i] = DL[i].split('=>');
+					    if (DL[i].length == 2) {
+						let key = DL[i][0].replace(/^\s+|\s+$/gm,''),
+						    ip =  DL[i][1].replace(/^\s+|\s+$/gm,'');
+
 						var re = new RegExp(key, 'ig');
 						if (re.test(question.name)) {
-							me.send([{ 
-								name: question.name,
-								type: 'A',
-								class: 'IN',
-								ttl: 600,
-								data: DS[key]
-							}], req, res);
-							CP.exit = 1;
-							cbk(true);
+						    me.send([{ 
+							name: question.name,
+							type: 'A',
+							class: 'IN',
+							ttl: 600,
+							data: ip
+						    }]);
+						    CP.exit = 1;
+						    cbk(true);
+						    return true
 						}
-					}
+					    }
+					} 
 					cbk(false);	
 				    }
 				});
