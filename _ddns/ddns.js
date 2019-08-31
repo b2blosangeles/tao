@@ -7,6 +7,8 @@
 		
 		this.send = function(v, req, res) {
 			let me = this;
+			console.log('---v--->')
+			console.log(v)
 			v[0].data =  (me.validateIPaddress(v[0].data)) ? v[0].data : null;
 			res.answer = v;	
 			res.end();
