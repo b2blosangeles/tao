@@ -61,6 +61,7 @@
 						if (key === question.name || re.test(question.name)) {
 							console.log('---ip--->');
 							console.log(ip);
+							console.log(key === question.name || re.test(question.name));
 						    me.send([{ 
 							name: question.name,
 							type: 'A',
