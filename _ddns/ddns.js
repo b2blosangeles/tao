@@ -40,31 +40,6 @@
 				    }
 				});
 			}
-			/*I 
-			_f['dynamic'] = function(cbk) {
-				let fn = env.config_path + '/dynamic_dns.json';
-				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
-				    if (err) {
-					    cbk(false);
-				    } else {
-				    	var DS = {};
-					try { DS = JSON.parse(data); } catch(e) {}
-					if (DS[question.name]) {
-						me.send([{ 
-							name: question.name,
-							type: 'A',
-							class: 'IN',
-							ttl: 600,
-							data: DS[question.name]
-						}], req, res);
-						CP.exit = 1;
-						cbk(true);
-					} else {
-						cbk(false);
-					}	
-				    }
-				});
-			}*/
 			_f['rule'] = function(cbk) {
 				let fn = env.config_path + '/rule_dns.data';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
