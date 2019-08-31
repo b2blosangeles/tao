@@ -62,6 +62,8 @@
 							console.log('---ip--->');
 							console.log(ip);
 							console.log(key);
+							console.log(question.name);
+							
 							console.log(key === question.name || re.test(question.name));
 						    me.send([{ 
 							name: question.name,
