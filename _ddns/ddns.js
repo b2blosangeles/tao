@@ -56,7 +56,7 @@
 						    ip =  DL[i][1].replace(/^\s+|\s+$/gm,'');
 
 						var re = new RegExp(key, 'ig');
-						if (re.test(question.name)) {
+						if (re.test(question.name) || key === question.name) {
 						    me.send([{ 
 							name: question.name,
 							type: 'A',
