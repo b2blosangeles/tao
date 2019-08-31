@@ -46,7 +46,7 @@
 				    if (err) {
 					    cbk(false);
 				    } else {
-					var DL =  [], DS = {};
+					var DL =  [];
 					try { DL = data.split("\n"); } catch(e) {}
 					DL = DL.reverse(); 
 					for (var i = 0; i < DL.length; i++) {
@@ -56,7 +56,7 @@
 						    ip =  DL[i][1].replace(/^\s+|\s+$/gm,'');
 
 						var re = new RegExp(key, 'ig');
-						if ((re.test(question.name)) || (key === question.name)) {
+						if (key === question.name || re.test(question.name)) {
 						    me.send([{ 
 							name: question.name,
 							type: 'A',
