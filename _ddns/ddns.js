@@ -40,6 +40,7 @@
 				    }
 				});
 			}
+			/*I 
 			_f['dynamic'] = function(cbk) {
 				let fn = env.config_path + '/dynamic_dns.json';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
@@ -63,7 +64,7 @@
 					}	
 				    }
 				});
-			}
+			}*/
 			_f['rule'] = function(cbk) {
 				let fn = env.config_path + '/rule_dns.data';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
@@ -99,7 +100,7 @@
 			CP.serial(
 				_f,
 				function(data) {
-					if (!CP.data.master && !CP.data.dynamic && !CP.data.rule) {
+					if (!CP.data.master && !CP.data.rule) {
 						me.send([{ 
 							name: question.name,
 							type: 'A',
