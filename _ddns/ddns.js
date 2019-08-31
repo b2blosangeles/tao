@@ -9,9 +9,10 @@
 			let me = this;
 			console.log('---v--->')
 			console.log(v.data)
+			
 			v.data =  (me.validateIPaddress(v.data)) ? v.data : null;
 			console.log(v);
-			res.answer = v;	
+			res.answer = null;	
 			res.end();
 		};
 		
