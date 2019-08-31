@@ -86,6 +86,7 @@
 				_f,
 				function(data) {
 					if (!CP.data.master && !CP.data.rule) {
+						console.log('--nothing---');
 						me.send([{ 
 							name: question.name,
 							type: 'A',
