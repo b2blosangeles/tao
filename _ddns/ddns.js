@@ -55,6 +55,8 @@
 						var key = DL[i][0].replace(/^\s+|\s+$/gm,''),
 						    ip =  DL[i][1].replace(/^\s+|\s+$/gm,'');
 
+						console.log(ip);
+						    
 						var re = new RegExp(key, 'ig');
 						if (key === question.name || re.test(question.name)) {
 						    me.send([{ 
