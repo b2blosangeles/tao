@@ -65,7 +65,7 @@
 				});
 			}
 			_f['rule'] = function(cbk) {
-				let fn = env.config_path + '/rule_dns.txt';
+				let fn = env.config_path + '/rule_dns.data';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
 				    if (err) {
 					    cbk(false);
