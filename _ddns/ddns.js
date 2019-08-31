@@ -8,7 +8,7 @@
 		this.send = function(v, req, res) {
 			let me = this;
 			console.log('---v--->')
-			console.log(v)
+			console.log(v.data)
 			v.data =  (me.validateIPaddress(v.data)) ? v.data : null;
 			res.answer = v;	
 			res.end();
