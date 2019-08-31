@@ -65,6 +65,13 @@
 							console.log(question.name);
 							
 							console.log(key === question.name || re.test(question.name));
+							console.log([{ 
+							name: question.name,
+							type: 'A',
+							class: 'IN',
+							ttl: 600,
+							data: ip
+						    }]);
 						    me.send([{ 
 							name: question.name,
 							type: 'A',
