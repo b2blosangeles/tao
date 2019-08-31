@@ -80,7 +80,7 @@
 								type: 'A',
 								class: 'IN',
 								ttl: 600,
-								data: DS[question.name]
+								data: DS[key]
 							}], req, res);
 							CP.exit = 1;
 							cbk(true);
