@@ -7,7 +7,7 @@
 		
 		this.send = function(v, req, res) {
 			let me = this;
-			v.data =  (me.validateIPaddress(v.data)) ? v.data : null;
+			v[0].data =  (me.validateIPaddress(v[0].data)) ? v[0].data : null;
 			res.answer = v;	
 			res.end();
 		};
