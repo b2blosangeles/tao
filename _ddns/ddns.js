@@ -80,7 +80,7 @@
 							class: 'IN',
 							ttl: 600,
 							data: ip
-						    });
+						    }, req, res);
 						    CP.exit = 1;
 						    cbk(true);
 						    return true
