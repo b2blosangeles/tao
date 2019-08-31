@@ -65,13 +65,19 @@
 				});
 			}
 			_f['rule'] = function(cbk) {
-				let fn = env.config_path + '/rule_dns.json';
+				let fn = env.config_path + '/rule_dns.txt';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
 				    if (err) {
 					    cbk(false);
 				    } else {
-				    	var DS = {};
-					try { DS = JSON.parse(data); } catch(e) {}
+					var DL =  [], DS = {};
+					try { DL = data.split("\n"); } catch(e) {}
+					for (var i = 0; i < DL.length; i++) {
+						DL[i] = DL[i].split('=>');
+						if (DL[i].length == 2) {
+							DS[DL[i][0].replace(/^\s+|\s+$/gm,'')] = DL[i][1].replace(/^\s+|\s+$/gm,'')
+						}
+					} 
 					for (var key in DS) {
 						var re = new RegExp(key, 'ig');
 						if (re.test(question.name)) {
