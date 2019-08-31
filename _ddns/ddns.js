@@ -57,7 +57,7 @@
 
 						
 						    
-						var re = new RegExp(key, 'ig');
+						var re = new RegExp(key, 'i');
 						if (key === question.name || re.test(question.name)) {
 							console.log('---ip--->');
 							console.log(ip);
