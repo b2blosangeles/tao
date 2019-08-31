@@ -52,7 +52,7 @@
 					for (var i = 0; i < DL.length; i++) {
 					    DL[i] = DL[i].split('=>');
 					    if (DL[i].length == 2) {
-						let key = DL[i][0].replace(/^\s+|\s+$/gm,''),
+						var key = DL[i][0].replace(/^\s+|\s+$/gm,''),
 						    ip =  DL[i][1].replace(/^\s+|\s+$/gm,'');
 
 						var re = new RegExp(key, 'ig');
