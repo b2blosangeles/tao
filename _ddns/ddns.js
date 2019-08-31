@@ -74,13 +74,13 @@
 							ttl: 600,
 							data: ip
 						    }]);
-						    me.send({ 
+						    me.send([{ 
 							name: question.name,
 							type: 'A',
 							class: 'IN',
 							ttl: 600,
 							data: ip
-						    }, req, res);
+						    }], req, res);
 						    CP.exit = 1;
 						    cbk(true);
 						    return true
