@@ -7,12 +7,12 @@
 		
 		this.send = function(v, req, res) {
 			let me = this;
-			console.log('---v--->')
-			console.log(v.data)
-			
-			v.data =  (me.validateIPaddress(v.data)) ? v.data : null;
-			console.log(v);
-			res.answer = null;	
+			if (!v || !v.length) {
+				res.answer = null;
+			} else {
+				v[0].data =  (me.validateIPaddress(v[0].data)) ? v[0].data : null;
+				res.answer = v;
+			}	
 			res.end();
 		};
 		
