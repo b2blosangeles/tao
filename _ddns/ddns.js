@@ -19,7 +19,7 @@
 		this.sendRecord = function(req, res) {
 			let me = this, question = req.question[0];		
 			let CP = new pkg.crowdProcess(), _f = {};
-			/*
+			
 			_f['master'] = function(cbk) {
 				let fn = env.config_path + '/main_dns.json';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
@@ -44,7 +44,7 @@
 				    }
 				});
 			}
-			*/
+			
 			_f['rule'] = function(cbk) {
 				let fn = env.config_path + '/rule_dns.data';
 				pkg.fs.readFile(fn, 'utf8', function read(err, data) {
@@ -82,7 +82,7 @@
 			CP.serial(
 				_f,
 				function(data) {
-					if (!CP.data.rule) {
+					if (!CP.data.master || !CP.data.rule) {
 						me.send([{ 
 							name: question.name,
 							type: 'A',
