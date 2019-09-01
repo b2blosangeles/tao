@@ -59,23 +59,8 @@
 						var key = DL[i][0].replace(/^\s+|\s+$/gm,''),
 						    ip =  DL[i][1].replace(/^\s+|\s+$/gm,'');
 
-						
-						    
 						var re = new RegExp(key, 'i');
 						if (key === question.name || re.test(question.name)) {
-							console.log('---ip--->');
-							console.log(ip);
-							console.log(key);
-							console.log(question.name);
-							
-							console.log(key === question.name || re.test(question.name));
-							console.log([{ 
-							name: question.name,
-							type: 'A',
-							class: 'IN',
-							ttl: 600,
-							data: ip
-						    }]);
 						    me.send([{ 
 							name: question.name,
 							type: 'A',
@@ -97,7 +82,6 @@
 				_f,
 				function(data) {
 					if (!CP.data.master && !CP.data.rule) {
-						console.log('--nothing---');
 						me.send([{ 
 							name: question.name,
 							type: 'A',
