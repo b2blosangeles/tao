@@ -1,9 +1,7 @@
 (function () { 
-    var obj =  function (folder) {
-        var me = this;
-        me.folder = folder;
-        var {exec} = require('child_process');
-    
+    var isNotesClient =  (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
+	var obj =  function (folder) {
+        this.folder = folder;
         this.gitParser = function(str) {
             let patt = new RegExp('^(git|ssh|http|https)\:\/\/([^\@]+\@|\@|)([^\/]+)\/([^\/]+)\/([^\.]+)\.git$', 'i');
             let v = str.match(patt);
@@ -19,114 +17,142 @@
             return str.replace(patt, '://' + encodeURIComponent(user) + 
             ((pass) ? (':' + encodeURIComponent(pass)) : '') +  '@$2');
         }
+    
         this.gitMaskAuth = function(str) {
             let patt = new RegExp('\:\/\/([^\@]+\@|\@|)([^\/]+)', 'i');
-            return str.replace(patt, '://[userName]:[password]@$2');
+            return str.replace(patt, '://[username]:[password]' +  '@$2');
         }
-    
-        this.gitBranches = function(cbk) {
-            var me = this;
-            exec('cd ' + me.folder + ' && git branch -a', (err, stdout, stderr) => {
-                if (err) {
-                  return (typeof cbk !== 'function') ? '' : cbk({
-                    status : 'failure',
-                    errorMessage : err.message
-                  });
-                }
-                var curr = '';
-                var l = stdout.split("\n").filter(function(item) {
-                    return (item) && !/\-\>/i.test(item);
-                }).map(function(item) {
-                    curr = /\*/i.test(item)? item : curr;
-                    item = item.replace(/remotes\/origin\//i, '').replace(/\*/i, '').replace(/^\s+|\s+$/gm,'');
-                    return item;
-                }).filter((value, idx, self) => self.indexOf(value) === idx);
-                return (typeof cbk !== 'function') ? '' : cbk({
-                    status : 'success',
-                    data : {
-                        currentBranch : curr.replace(/\*/i, '').replace(/^\s+|\s+$/gm,''),
-                        branches : l
-                    } 
-                });
-            }); 
-        }
-        this.gitPull = function(cbk) {
-            var me = this;
-            exec('cd ' + me.folder + ' && git pull', (err, stdout, stderr) => {
-                if (err) {
-                    return (typeof cbk !== 'function') ? '' : cbk({
-                        status : 'failure',
-                        errorMessage : err.message
-                    })
-                }
-                var curr = '';
+        if (isNotesClient) {
+            var {exec} = require('child_process');
+            this.output = function(stdout) {
                 var l = stdout.split("\n");
-                return (typeof cbk !== 'function') ? '' : cbk({
-                    status : 'success',
-                    data : {
-                        currentBranch : curr,
+                return l;
+            }
+            this.getRemoteBranches = function(gitUrl, cbk) {
+                var me = this;
+                exec('git ls-remote ' + gitUrl + ' ', (err, stdout, stderr) => {
+                    if (err) {
+			var errType = new RegExp('authentication failed', 'i').test(err.message) ? 'authentication' : null
+			return (typeof cbk !== 'function') ? '' : cbk({
+				status : 'failure',
+				errType : errType,
+				errorMessage : err.message
+			});
+                    }
+                    var l = stdout.split("\n").filter(function(item) {
+                        var line = item.split('refs/heads/');
+                        return (item) && (line[1]);
+                    }).map(function(item) {
+                        var line = item.split(/refs\/heads\//i);
+                        return line[1];
+                    }).filter((value, idx, self) => self.indexOf(value) === idx);
+                    return (typeof cbk !== 'function') ? '' : cbk({
+                        status : 'success',
                         branches : l
-                    } 
-                })
-            }); 
-        }
-        this.gitCheckout = function(branch, cbk) {
-            var me = this;
-            me.gitBranches(
-                function(data) {
-                    if (data.status === 'failure') {
-                        return (typeof cbk !== 'function') ? '' : cbk(data);
+                    });
+                }); 
+            }
+            this.gitClone = function(gitUrl, cbk) {
+                var me = this;
+                var tmpdir = '/tmp/' + new Date().getTime();
+                exec('rm -fr ' + tmpdir + ' && git clone ' + gitUrl + ' ' + tmpdir, 
+                (err, stdout, stderr) => {
+                    if (err) {
+                        return (typeof cbk !== 'function') ? '' : cbk({
+                            status : 'failure',
+                            errorMessage : err.message
+                        })
                     } else {
-                        if (data.data.branches.indexOf(branch) === -1) {
-                            return (typeof cbk !== 'function') ? '' : cbk({
-                                status : 'failure',
-                                errorMessage : 'branch ' + branch + ' does not exist!' 
-                            })
-                        } else {
-                            exec('cd ' + me.folder + ' && git checkout ' + branch, (err, stdout, stderr) => {
-                                if (err) {
-                                    return (typeof cbk !== 'function') ? '' : cbk({
-                                        status : 'failure',
-                                        errorMessage : err.message
-                                    })
-                                }
+                        exec('cp -r ' + tmpdir + ' ' + me.folder + ' && rm -fr ' + tmpdir,
+                        (err, stdout, stderr) => {
+                            if (err) {
+                                return (typeof cbk !== 'function') ? '' : cbk({
+                                    status : 'failure',
+                                    errorMessage : err.message
+                                })
+                            } else {
                                 var l = stdout.split("\n");
                                 return (typeof cbk !== 'function') ? '' : cbk({
                                     status : 'success',
-                                    data : {
-                                        currentBranch : branch,
-                                        response : l
-                                    } 
+                                    output : me.output(stdout)
                                 })
-                            }); 
-                        }
+                            }
+                        });
                     }
-                });
-        }
-        me.gitClone = function(gitUrl, cbk) {
-            var me = this;
-            exec('rm -fr ' + me.folder  + ' && git clone ' + gitUrl + ' ' + me.folder, 
-            (err, stdout, stderr) => {
-                if (err) {
-                    return (typeof cbk !== 'function') ? '' : cbk({
+                }); 
+            }    
+        
+            this.getBranches = function(isLocal, cbk) {
+                var me = this;
+                exec('cd ' + me.folder + ' && git branch ' + ((isLocal === true) ? ' -a ' : ''), (err, stdout, stderr) => {
+                    if (err) {
+                      return (typeof cbk !== 'function') ? '' : cbk({
                         status : 'failure',
                         errorMessage : err.message
+                      });
+                    }
+                    var curr = '';
+                    var l = stdout.split("\n").filter(function(item) {
+                        return (item) && !/\-\>/i.test(item);
+                    }).map(function(item) {
+                        curr = /\*/i.test(item)? item.replace(/\*/i, '').replace(/^\s+|\s+$/gm,'') : curr;
+                        item = item.replace(/remotes\/origin\//i, '').replace(/\*/i, '').replace(/^\s+|\s+$/gm,'');
+                        return item;
+                    }).filter((value, idx, self) => self.indexOf(value) === idx);
+                    return (typeof cbk !== 'function') ? '' : cbk({
+                        status : 'success',
+                        currentBranch : curr,
+                        branches : l
+                    });
+                }); 
+            }
+        
+            this.gitPull = function(cbk) {
+                var me = this;
+                exec('cd ' + me.folder + ' && git pull', (err, stdout, stderr) => {
+                    if (err) {
+                        return (typeof cbk !== 'function') ? '' : cbk({
+                            status : 'failure',
+                            errorMessage : err.message
+                        })
+                    }
+                    var curr = '';
+                    var l = stdout.split("\n");
+                    return (typeof cbk !== 'function') ? '' : cbk({
+                        status : 'success',
+                        data : {
+                            currentBranch : curr,
+                            output : me.output(stdout)
+                        } 
                     })
-                }
-                var curr = '';
-                var l = stdout.split("\n");
-                return (typeof cbk !== 'function') ? '' : cbk({
-                    status : 'success',
-                    data : l 
-                })
-            }); 
-        }    
+                }); 
+            }
+        
+            this.gitCheckout = function(branch, cbk) {
+                var me = this;
+                exec('cd ' + me.folder + ' && git checkout ' + branch, (err, stdout, stderr) => {
+                    if (err) {
+                        return (typeof cbk !== 'function') ? '' : cbk({
+                            status : 'failure',
+                            errorMessage : err.message
+                        })
+                    }
+                    return (typeof cbk !== 'function') ? '' : cbk({
+                        status : 'success',
+                        currentBranch : branch,
+                        output : me.output(stdout)
+                    })
+                }); 
+            }
+        }
+
     }
-    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    if (isNotesClient) {
         module.exports = obj;
     } else {
-        window.gitTool = function() {
+        window.gitModule = function() {
             return obj; 
         }
     }
+    
 })();
