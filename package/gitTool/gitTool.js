@@ -72,23 +72,36 @@
         }
         this.gitCheckout = function(branch, cbk) {
             var me = this;
-            exec('cd ' + me.folder + ' && git checkout ' + branch, (err, stdout, stderr) => {
-                if (err) {
-                    return (typeof cbk !== 'function') ? '' : cbk({
-                        status : 'failure',
-                        errorMessage : err.message
-                    })
-                }
-                var curr = '';
-                var l = stdout.split("\n");
-                return (typeof cbk !== 'function') ? '' : cbk({
-                    status : 'success',
-                    data : {
-                        currentBranch : curr,
-                        branches : l
-                    } 
-                })
-            }); 
+            me.gitBranches(
+                function(data) {
+                    if (data.status === 'failure') {
+                        return (typeof cbk !== 'function') ? '' : cbk(data);
+                    } else {
+                        if (data.data.branches.indexOf(branch) === -1) {
+                            return (typeof cbk !== 'function') ? '' : cbk({
+                                status : 'failure',
+                                errorMessage : 'branch ' + branch + ' does not exist!' 
+                            })
+                        } else {
+                            exec('cd ' + me.folder + ' && git checkout ' + branch, (err, stdout, stderr) => {
+                                if (err) {
+                                    return (typeof cbk !== 'function') ? '' : cbk({
+                                        status : 'failure',
+                                        errorMessage : err.message
+                                    })
+                                }
+                                var l = stdout.split("\n");
+                                return (typeof cbk !== 'function') ? '' : cbk({
+                                    status : 'success',
+                                    data : {
+                                        currentBranch : branch,
+                                        branches : l
+                                    } 
+                                })
+                            }); 
+                        }
+                    }
+                });
         }
         me.gitClone = function(gitUrl, cbk) {
             var me = this;
