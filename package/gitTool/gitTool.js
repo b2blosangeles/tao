@@ -95,7 +95,7 @@
                                     status : 'success',
                                     data : {
                                         currentBranch : branch,
-                                        branches : l
+                                        response : l
                                     } 
                                 })
                             }); 
