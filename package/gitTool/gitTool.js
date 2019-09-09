@@ -84,7 +84,7 @@
         
             this.getBranches = function(isLocal, cbk) {
                 var me = this;
-                exec('cd ' + me.folder + ' && git branch ' + ((isLocal === true) ? ' -a ' : ''), (err, stdout, stderr) => {
+                exec('cd ' + me.folder + ' && git branch ' + ((isLocal === true) ? ' ' : ' -a '), (err, stdout, stderr) => {
                     if (err) {
                       return (typeof cbk !== 'function') ? '' : cbk({
                         status : 'failure',
