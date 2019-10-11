@@ -33,7 +33,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 600,
+							ttl: 300,
 							data: DS[question.name]
 						}], req, res);
 						CP.exit = 1;
@@ -66,7 +66,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 600,
+							ttl: 300,
 							data: ip
 						    }], req, res);
 						    CP.exit = 1;
