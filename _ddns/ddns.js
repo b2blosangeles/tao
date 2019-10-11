@@ -87,7 +87,7 @@
 							name: question.name,
 							type: 'A',
 							class: 'IN',
-							ttl: 600,
+							ttl: 10,
 							data: null
 						}], req, res);
 					}
