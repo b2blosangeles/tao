@@ -83,13 +83,15 @@
 				_f,
 				function(data) {
 					if (!CP.data.master || !CP.data.rule) {
+						res.end();
+						/*
 						me.send([{ 
 							name: question.name,
 							type: 'A',
 							class: 'IN',
 							ttl: 10,
 							data: null
-						}], req, res);
+						}], req, res);*/
 					}
 				}, 1000
 			);
