@@ -23,8 +23,8 @@
 					return v;
 				}
 				
-				if(host.match(/^([a-z0-9]+)\.dev([0-9]+|)\.(taobase|shusiou)\.(com|win)$/i)) { 
-					let RT = host.match(/^([a-z0-9]+)\.dev([0-9]+|)\.(taobase|shusiou)\.(com|win)$/);
+				if(host.match(/^([a-z0-9]+)\.dev([0-9]+)\.(taobase|shusiou)\.(com|win)$/i)) { 
+					let RT = host.match(/^([a-z0-9]+)\.dev([0-9]+)\.(taobase|shusiou)\.(com|win)$/);
 					v.site_path = v.root_path + '/devs/' + RT[1];
 					return v;
 				}
