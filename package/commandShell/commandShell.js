@@ -4,7 +4,7 @@
             
             me.exec = function(cmd, cbk, timeout) {
                 var { spawn } = require('child_process');
-                var cmda = cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '';
+                var cmda = cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '', isError = false;
                 var ps = spawn(cmda.shift(), cmda, {detached: true});
                 ps.stdout.setEncoding('utf8')
 
@@ -17,7 +17,7 @@
                 });
 
                 ps.on('error', (code) => {
-                  retStr.error = true;
+                  isError = true;
                   if (!retStr.errorMessage) retStr.errorMessage = [];
                   retStr.errorMessage.push(`ps error: ${data}`);
                 });
@@ -25,7 +25,7 @@
                 ps.on('close', (code) => {
                     normalClosed= true
                     if (code !== 0) {
-                        retStr.error = true;
+                        isError = true;
                         if (!retStr.errorMessage) retStr.errorMessage = [];
                         retStr.errorMessage.push(`ps process exited with code ${code}`);
                     }
@@ -43,9 +43,10 @@
                       if (!normalClosed) {
                           //    ps.kill();
                           process.kill(-ps.pid);
-                          retStr.error = true;
+                          isError = true;
                           if (!retStr.errorMessage) retStr.errorMessage = [];
                           retStr.errorMessage.push('shell command timeout!');
+                          retStr.status = (!isError) ? 'success' : 'failure';
                           cbk(retStr);
                       }
                 }, (!timeout) ? 8000 :  timeout)
