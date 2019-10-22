@@ -6,6 +6,7 @@
                  var crowdProcess = require('../../package/crowdProcess/crowdProcess'); 
                  var list = listCmd.split(/\&\&/);
                  var CP = new crowdProcess();
+                  var cwd = __dirname;
                  var _f = {};
                  for (var i = 0; i < list.length; i++) {
                        _f['P_'+i] = (function(i) {
@@ -14,7 +15,7 @@
                                    if (!cmd) {
                                       cbk0({status: 'failure', errorMessage : 'missing command ' + i});
                                    } else {
-                                      me.exec({cmd : cmd}, cbk0, (!timeout) ? 8000 :  timeout)
+                                      me.exec({cmd : cmd, cwd : cwd}, cbk0, (!timeout) ? 8000 :  timeout)
                                    }
                              }
                        })(i)
