@@ -28,7 +28,7 @@
                                     result['P_'+i] = CP.data['P_'+i];
                               }    
                           }
-                          data.result = result;
+                          data.results = result;
                           cbk(data);
                      }, (!timeout) ? 8000 :  timeout);
             }
