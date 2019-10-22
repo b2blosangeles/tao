@@ -34,7 +34,7 @@
                     } catch (e) {
                           retStr.data = resultData;
                     }
-                    cbk(resultData);
+                    cbk(retStr);
                 });
 
                 setTimeout(function() {
