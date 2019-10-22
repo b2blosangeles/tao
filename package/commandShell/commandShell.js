@@ -10,16 +10,15 @@
                  for (var i = 0; i < list.length; i++) {
                        _f['P_'+i] = (function(i) {
                              return function(cbk0) {
-                                   cbk(list[i])
+                                   cbk0(list[i])
                              }
-                       
                        })(i)
                  }
                  CP.serial(
                      _f,
                      function(data) {
                          cbk(data);
-                     }, 6000);
+                     }, (!timeout) ? 8000 :  timeout);
             }
             me.exec = function(cmd, cbk, timeout) {
                 var { spawn } = require('child_process');
