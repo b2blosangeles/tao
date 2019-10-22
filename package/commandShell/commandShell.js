@@ -2,7 +2,7 @@
       var obj =  function () {
             let me = this;
             
-            me.batchExec = function(listCmd, cbk) {
+            me.batchExec = function(listCmd, cbk, timeout) {
                  var crowdProcess = require('../../package/crowdProcess/crowdProcess'); 
                  var list = listCmd.split(/\&\&/);
                  var CP = new crowdProcess();
