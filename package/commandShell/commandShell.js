@@ -10,14 +10,21 @@
                  for (var i = 0; i < list.length; i++) {
                        _f['P_'+i] = (function(i) {
                              return function(cbk0) {
-                                   cbk0(list[i])
+                                   me.exec(list[i], cbk0, (!timeout) ? 8000 :  timeout)
                              }
                        })(i)
                  }
                  CP.serial(
                      _f,
                      function(data) {
-                         cbk(data);
+                          let result = {};
+                          for (var i = 0; i < list.length; i++) {
+                              if (CP.data['P_'+i]) {
+                                    result['P_'+i] = CP.data['P_'+i];
+                              }    
+                          }
+                          data.result = result;
+                          cbk(data);
                      }, (!timeout) ? 8000 :  timeout);
             }
             me.exec = function(cmd, cbk, timeout) {
