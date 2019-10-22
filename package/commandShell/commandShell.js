@@ -19,7 +19,7 @@
                 ps.on('error', (code) => {
                   isError = true;
                   if (!retStr.errorMessage) retStr.errorMessage = [];
-                  retStr.errorMessage.push(`ps error: ${data}`);
+                  retStr.errorMessage.push(`ps error: ${code}`);
                 });
                   
                 ps.on('close', (code) => {
