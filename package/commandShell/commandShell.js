@@ -15,7 +15,7 @@
                                    var m = cmd.match(/cd\s+([^\s]+)$/i);
                                    if (!cmd) {
                                       cbk0({status: 'failure', errorMessage : 'missing command ' + i}); 
-                                   } else if (m[1]) {
+                                   } else if ((m) && (m[1])) {
                                        cwd =  m[1];
                                        cbk0({status: 'success'})  
                                    } else {
