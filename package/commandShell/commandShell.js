@@ -10,7 +10,12 @@
                  for (var i = 0; i < list.length; i++) {
                        _f['P_'+i] = (function(i) {
                              return function(cbk0) {
-                                   me.exec(list[i], cbk0, (!timeout) ? 8000 :  timeout)
+                                   var cmd = list[i].replace(/^\s+|\s+$/gm,'');
+                                   if (!cmd) {
+                                      cbk0({status: 'failure', errorMessage : 'missing command ' + i});
+                                   } else {
+                                      me.exec(list[i].replace(/^\s+|\s+$/gm,''), cbk0, (!timeout) ? 8000 :  timeout)
+                                   }
                              }
                        })(i)
                  }
