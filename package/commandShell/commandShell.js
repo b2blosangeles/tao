@@ -2,6 +2,11 @@
       var obj =  function () {
             let me = this;
             
+            me.batchExec = function(listCmd, cbk) {
+                 var crowdProcess = require('../../package/crowdProcess/crowdProcess'); 
+                 var list = listCmd.split(/\&\&/);
+                 cbk(list);
+            }
             me.exec = function(cmd, cbk, timeout) {
                 var { spawn } = require('child_process');
                 var cmda = cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '', isError = false;
