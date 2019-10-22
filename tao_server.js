@@ -26,6 +26,7 @@ var svr = function() {
 	var COMM = require('./package/comm/comm');
 	var pkg = {
 		crowdProcess	:require('./package/crowdProcess/crowdProcess'),
+		commandShell	:require('./package/commandShell/commandShell'),
 		comm		:new COMM(),
 		request		:require('./package/request/node_modules/request'),
 		syntaxError	:require('./package/syntax-error/node_modules/syntax-error'),
