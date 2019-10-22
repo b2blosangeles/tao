@@ -16,7 +16,8 @@
                                    if (!cmd) {
                                       cbk0({status: 'failure', errorMessage : 'missing command ' + i}); 
                                    } else if (m[1]) {
-                                       cwd =  m[1]; 
+                                       cwd =  m[1];
+                                       cbk0({status: 'success'})  
                                    } else {
                                       me.exec({cmd : cmd, cwd : cwd}, cbk0, (!timeout) ? 8000 :  timeout)
                                    }
