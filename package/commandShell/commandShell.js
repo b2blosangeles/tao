@@ -2,7 +2,7 @@
       var obj =  function () {
             let me = this;
             
-            me.batchExec = function(listCmd, cbk, timeout) {
+            me.run = function(listCmd, cbk, timeout) {
                  var crowdProcess = require('../../package/crowdProcess/crowdProcess'); 
                  var list = listCmd.split(/\&\&/);
                  var CP = new crowdProcess();
@@ -19,7 +19,7 @@
                                        cwd =  m[1];
                                        cbk0({status: 'success'})  
                                    } else {
-                                      me.exec({cmd : cmd, cwd : cwd}, cbk0, (!timeout) ? 8000 :  timeout)
+                                      me.singleExec({cmd : cmd, cwd : cwd}, cbk0, (!timeout) ? 8000 :  timeout)
                                    }
                              }
                        })(i)
@@ -37,7 +37,7 @@
                           cbk(data);
                      }, (!timeout) ? 8000 :  timeout);
             }
-            me.exec = function(cfg, cbk, timeout) {
+            me.singleExec = function(cfg, cbk, timeout) {
                 var { spawn } = require('child_process');
                 var cmda = cfg.cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '', isError = false;
                 var param = { detached: true};
