@@ -5,7 +5,21 @@
             me.batchExec = function(listCmd, cbk) {
                  var crowdProcess = require('../../package/crowdProcess/crowdProcess'); 
                  var list = listCmd.split(/\&\&/);
-                 cbk(list);
+                 var CP = new crowdProcess();
+                 var _f = {};
+                 for (var i = 0; i < list.length; i++) {
+                       _f['P_'+i] = (function(i) {
+                             return function(cbk0) {
+                                   cbk(list[i])
+                             }
+                       
+                       })(i)
+                 }
+                 CP.serial(
+                     _f,
+                     function(data) {
+                         cbk(data);
+                     }, 6000);
             }
             me.exec = function(cmd, cbk, timeout) {
                 var { spawn } = require('child_process');
