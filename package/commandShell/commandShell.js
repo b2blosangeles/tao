@@ -14,7 +14,7 @@
                                    if (!cmd) {
                                       cbk0({status: 'failure', errorMessage : 'missing command ' + i});
                                    } else {
-                                      me.exec(cmd, cbk0, (!timeout) ? 8000 :  timeout)
+                                      me.exec({cmd : cmd}, cbk0, (!timeout) ? 8000 :  timeout)
                                    }
                              }
                        })(i)
