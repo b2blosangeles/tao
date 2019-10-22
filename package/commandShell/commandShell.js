@@ -36,6 +36,7 @@
                     } catch (e) {
                           retStr.data = resultData;
                     }
+                    retStr.status = (!isError) ? 'success' : 'failure';
                     cbk(retStr);
                 });
 
