@@ -12,8 +12,11 @@
                        _f['P_'+i] = (function(i) {
                              return function(cbk0) {
                                    var cmd = list[i].replace(/^\s+|\s+$/gm,'');
+                                   var m = cmd.match(/cd\s+([^\s]+)$/i);
                                    if (!cmd) {
-                                      cbk0({status: 'failure', errorMessage : 'missing command ' + i});
+                                      cbk0({status: 'failure', errorMessage : 'missing command ' + i}); 
+                                   } else if (m[1]) {
+                                       cwd =  m[1]; 
                                    } else {
                                       me.exec({cmd : cmd, cwd : cwd}, cbk0, (!timeout) ? 8000 :  timeout)
                                    }
