@@ -32,10 +32,14 @@
                           cbk(data);
                      }, (!timeout) ? 8000 :  timeout);
             }
-            me.exec = function(cmd, cbk, timeout) {
+            me.exec = function(cfg, cbk, timeout) {
                 var { spawn } = require('child_process');
-                var cmda = cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '', isError = false;
-                var ps = spawn(cmda.shift(), cmda, {detached: true});
+                var cmda = cfg.cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '', isError = false;
+                var param = { detached: true};
+                if (cfg.cwd){
+                      param = cfg.cwd;
+                }
+                var ps = spawn(cmda.shift(), cmda, param);
                 ps.stdout.setEncoding('utf8')
 
                 ps.stdout.on('data', (data) => {
