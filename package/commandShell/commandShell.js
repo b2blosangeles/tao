@@ -42,7 +42,7 @@
                 var cmda = cfg.cmd.split(/[\s]+/), retStr = {}, normalClosed = false, resultData = '', isError = false;
                 var param = { detached: true};
                 if (cfg.cwd){
-                      param = cfg.cwd;
+                      param.cwd = cfg.cwd;
                 }
                 var ps = spawn(cmda.shift(), cmda, param);
                 ps.stdout.setEncoding('utf8')
