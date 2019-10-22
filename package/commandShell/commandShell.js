@@ -1,5 +1,5 @@
 (function () {
-      var obj =  function (TAO) {
+      var obj =  function () {
             let me = this;
             
             me.exec = function(cmd, cbk, timeout) {
